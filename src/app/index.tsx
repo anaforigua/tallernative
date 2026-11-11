@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import MiBoton from "../components/Miboton";
+import MiBoton from "../components/MiBoton";
 
 export default function Inicio() {
   return (

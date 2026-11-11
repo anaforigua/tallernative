@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import TarjetaEstudio from "../components/TarjetaEstudio";
+import TarjetaEstudio from "../components/TarjetaEstadio";
 
 export default function Estudios() {
   return (
