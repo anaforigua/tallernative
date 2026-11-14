@@ -1,22 +1,23 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import TarjetaEstudio from "../components/TarjetaEstadio";
+import { ScrollView, Text } from "react-native";
+import TarjetaEstudio from "../components/TarjetaEstudio";
+import { globalStyles } from "../styles/globalStyles";
 
 export default function Estudios() {
   return (
-    <ScrollView style={styles.contenedor} contentContainerStyle={styles.contenido}>
-      <Text style={styles.tituloPrincipal}>Formación Académica</Text>
-
+    <ScrollView style={globalStyles.contenedor} contentContainerStyle={globalStyles.contenido}>
+      <Text style={globalStyles.tituloPrincipal}>Formación Académica</Text>
+      
       <TarjetaEstudio
         titulo="Bachiller Académico"
-        institucion="Institución Educativa Distrital"
-        anio={2022}
+        institucion="Gerardo Paredes Martinez"
+        anio={2025}
         enCurso={false}
       />
 
       <TarjetaEstudio
         titulo="Técnico en Programación de Software"
-        institucion="Colegio Técnico Aliado"
-        anio={2024}
+        institucion="SENA - Centro de Gestión de Mercados, Logística y TIC"
+        anio={2025}
         enCurso={false}
       />
 
@@ -28,10 +29,4 @@ export default function Estudios() {
       />
     </ScrollView>
   );
-}
-
-const styles = StyleSheet.create({
-  contenedor: { flex: 1, backgroundColor: "#f8fafc" },
-  contenido: { padding: 20 },
-  tituloPrincipal: { fontSize: 20, fontWeight: "bold", color: "#0f172a", marginBottom: 12 },
-});
+};

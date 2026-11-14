@@ -1,76 +1,193 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import MiBoton from "../components/MiBoton";
+import { ScrollView, Text, TouchableOpacity, View, StyleSheet, Linking, Alert, Image } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { globalStyles } from "../styles/globalStyles";
 
 export default function Inicio() {
+  // Función auxiliar para abrir enlaces externos (WhatsApp y GitHub)
+  const abrirEnlace = (url: string) => {
+    Linking.openURL(url).catch((err) => console.error("Error al abrir el enlace:", err));
+  };
+
+  // Función para abrir Gmail web directamente
+  const abrirCorreo = () => {
+    const email = "anamariaforigua20@gmail.com";
+    const urlGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+
+    Linking.openURL(urlGmail).catch(() => {
+      Alert.alert(
+        "Correo Electrónico", 
+        `Puedes escribirme directamente a:\n\n${email}`
+      );
+    });
+  };
+  
   return (
-    <ScrollView style={styles.contenedor} contentContainerStyle={styles.contenido}>
-      <View style={styles.avatarContenedor}>
-        <Ionicons name="person-circle" size={100} color="#2563eb" />
-        <Text style={styles.nombre}>Anamaria Forigua Murcia</Text>
-        <Text style={styles.profesion}>Tecnólogo en ADSO</Text>
+    <ScrollView style={globalStyles.contenedor} contentContainerStyle={globalStyles.contenido}>
+      
+      {/* 1. Cabecera limpia y centrada */}
+      <View style={styles.avatarContainer}>
+        <Image 
+          source={require("../../assets/perfil.png")} 
+          style={styles.imagenPerfil} 
+        />
       </View>
 
-      <View style={styles.seccion}>
-        <Text style={styles.subtituloSeccion}>Perfil Profesional</Text>
-        <Text style={styles.parrafo}>
-          Aprendiz del SENA apasionado por el desarrollo de aplicaciones móviles
-          y web. Con habilidades en React Native, JavaScript, HTML5, Python y
-          gestión de bases de datos relacionales y no relacionales.
+      <Text style={styles.tituloPrincipal}>Anamaria Forigua Murcia</Text>
+      <Text style={styles.subtitulo}>Análisis y Desarrollo de Software (ADSO) - SENA</Text>
+      
+      <Text style={styles.descripcionPerfil}>
+        Bienvenido a mi portafolio digital. Aquí puedes encontrar mis canales de contacto directo y acceder a mis repositorios de código.
+      </Text>
+
+
+      <Text style={styles.seccionTitulo}>Perfil Profesional</Text>
+      
+      <View style={[globalStyles.tarjeta, styles.tarjetaPerfilTecnico]}>
+        <Text style={styles.textoPerfilTecnico}>
+          Estudiante de Análisis y Desarrollo de Software (ADSO) en el SENA. Aunque no poseo experiencia laboral formal, cuento con una sólida formación práctica en arquitectura de software, calidad, testing y documentación técnica. He desarrollado diversos mini-proyectos aplicando tecnologías como React, TypeScript, JavaScript, HTML, CSS, Python y PostgreSQL, destacando por mi  constante autoaprendizaje y la curiosidad.
         </Text>
       </View>
 
-      <View style={styles.seccion}>
-        <Text style={styles.subtituloSeccion}>Contacto y Enlaces</Text>
-        <MiBoton
-          textoBoton="Enviar Correo"
-          nombreIcono="mail"
-          colorBoton="#E8D464"
-          onPress={() =>
-            Alert.alert("Contacto", "Correo: anamaria.forigua@misena.edu.co")
-          }
-        />
-        <MiBoton
-          textoBoton="Llamar"
-          nombreIcono="call"
-          colorBoton="#2563eb"
-          onPress={() => Alert.alert("Teléfono", "Celular: +57 300 1234567")}
-        />
-        <MiBoton
-          textoBoton="Ver Perfil LinkedIn"
-          nombreIcono="logo-linkedin"
-          colorBoton="#0a66c2"
-          onPress={() => Alert.alert("LinkedIn", "linkedin.com/in/anamaria-forigua")}
-        />
-        <MiBoton
-          textoBoton="GitHub / Repositorio"
-          nombreIcono="logo-github"
-          colorBoton="#24292e"
-          onPress={() => Alert.alert("GitHub", "github.com/anamariaforigua/revenfy")}
-        />
-      </View>
+      {/* 3. Sección de Contacto Directo */}
+      <Text style={styles.seccionTitulo}>Canales de Contacto</Text>
+
+      {/* Tarjeta de WhatsApp */}
+      <TouchableOpacity
+        style={[globalStyles.tarjeta, styles.tarjetaContacto]}
+        onPress={() => abrirEnlace("https://wa.me/573215460577")}
+        activeOpacity={0.8}
+      >
+        <View style={styles.contenedorIcono}>
+          <FontAwesome name="whatsapp" size={30} color="#25D366" />
+        </View>
+        <View style={styles.textoContainer}>
+          <Text style={styles.tituloSeccion}>WhatsApp</Text>
+          <Text style={styles.detalleContacto}>+57 321 5460577</Text>
+          <Text style={styles.enlaceTexto}>Toca para chatear →</Text>
+        </View>
+      </TouchableOpacity>
+
+      {/* Tarjeta de Correo Electrónico (Gmail) */}
+      <TouchableOpacity
+        style={[globalStyles.tarjeta, styles.tarjetaContacto]}
+        onPress={abrirCorreo}
+        activeOpacity={0.8}
+      >
+        <View style={styles.contenedorIcono}>
+          <FontAwesome name="envelope" size={26} color="#EA4335" />
+        </View>
+        <View style={styles.textoContainer}>
+          <Text style={styles.tituloSeccion}>Correo Electrónico</Text>
+          <Text style={styles.detalleContacto}>anamariaforigua20@gmail.com</Text>
+          <Text style={styles.enlaceTexto}>Toca para enviar mensaje →</Text>
+        </View>
+      </TouchableOpacity>
+
+      {/* Tarjeta de Repositorio GitHub */}
+      <TouchableOpacity
+        style={[globalStyles.tarjeta, styles.tarjetaContacto]}
+        onPress={() => abrirEnlace("https://github.com/anaforigua")}
+        activeOpacity={0.8}
+      >
+        <View style={styles.contenedorIcono}>
+          <FontAwesome name="github" size={30} color="#0f172a" />
+        </View>
+        <View style={styles.textoContainer}>
+          <Text style={styles.tituloSeccion}>Repositorio de GitHub</Text>
+          <Text style={styles.detalleContacto}>github.com/anaforigua</Text>
+          <Text style={styles.enlaceTexto}>Toca para ver proyectos →</Text>
+        </View>
+      </TouchableOpacity>
+
+     
+
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  contenedor: { flex: 1, backgroundColor: "#f8fafc" },
-  contenido: { padding: 20 },
-  avatarContenedor: { alignItems: "center", marginBottom: 20 },
-  nombre: { fontSize: 24, fontWeight: "bold", color: "#0f172a", marginTop: 8 },
-  profesion: { fontSize: 16, color: "#2563eb", fontWeight: "600" },
-  seccion: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 12,
+  avatarContainer: {
+    alignItems: "center",
     marginBottom: 16,
-    elevation: 1,
   },
-  subtituloSeccion: {
+  imagenPerfil: {
+    width: 110,
+    height: 110,
+    borderRadius: 55, 
+    borderWidth: 3,
+    borderColor: "#2563eb", 
+    backgroundColor: "#e2e8f0",
+  },
+  tituloPrincipal: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#0f172a",
+    textAlign: "center",
+    marginBottom: 4,
+  },
+  subtitulo: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#2563eb",
+    textAlign: "center",
+    marginBottom: 12,
+  },
+  descripcionPerfil: {
+    fontSize: 14,
+    color: "#475569",
+    textAlign: "center",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  seccionTitulo: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1e293b",
-    marginBottom: 8,
+    color: "#0f172a",
+    marginBottom: 12,
+    marginTop: 8,
   },
-  parrafo: { fontSize: 14, color: "#475569", lineHeight: 20 },
+  tarjetaContacto: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: "#2563eb",
+    marginBottom: 14,
+  },
+  contenedorIcono: {
+    width: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 16,
+  },
+  textoContainer: {
+    flex: 1,
+  },
+  tituloSeccion: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#0f172a",
+  },
+  detalleContacto: {
+    fontSize: 13,
+    color: "#475569",
+    marginTop: 2,
+  },
+  enlaceTexto: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#2563eb",
+    marginTop: 6,
+  },
+  tarjetaPerfilTecnico: {
+    borderLeftWidth: 4,
+    borderLeftColor: "#0f172a",
+    padding: 16,
+    marginBottom: 24,
+  },
+  textoPerfilTecnico: {
+    fontSize: 13,
+    color: "#475569",
+    lineHeight: 20,
+  },
 });

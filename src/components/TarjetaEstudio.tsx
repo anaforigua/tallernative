@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { colores } from "../styles/globalStyles";
 
 type Props = {
   titulo: string;
@@ -37,12 +38,12 @@ const estilos = StyleSheet.create({
     elevation: 1,
   },
   finalizado: {
-    backgroundColor: "#ffffff",
-    borderColor: "#e2e8f0",
+    backgroundColor: colores.blanco,
+    borderColor: colores.borde,
   },
   enCurso: {
     backgroundColor: "#eef2ff",
-    borderColor: "#6366f1",
+    borderColor: colores.azulPrimario,
   },
   headerFila: {
     flexDirection: "row",
@@ -53,20 +54,20 @@ const estilos = StyleSheet.create({
   titulo: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#0f172a",
+    color: colores.textoPrincipal,
   },
   subtitulo: {
     fontSize: 14,
-    color: "#475569",
+    color: colores.textoSecundario,
   },
   anio: {
     fontSize: 12,
-    color: "#94a3b8",
+    color: colores.grisClaro,
     marginTop: 4,
   },
   badge: {
-    backgroundColor: "#7c3aed", // Cápsula morada (Reto obligatorio)
-    color: "#ffffff",
+    backgroundColor: "#7c3aed", // Cápsula morada del reto obligatorio
+    color: colores.blanco,
     fontWeight: "bold",
     fontSize: 10,
     paddingHorizontal: 8,
